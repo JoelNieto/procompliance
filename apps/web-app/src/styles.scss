@@ -1,1 +1,56 @@
+@layer icons, tw-base, primeng, tw-components, tw-utilities, tw-variants;
+
+// Please take note of the order in which these are imported
+@import 'primeicons/primeicons.css' layer(icons);
+@import 'tailwindcss/base.css' layer(tw-base);
+@import 'tailwindcss/components.css' layer(tw-components);
+@import 'tailwindcss/utilities.css' layer(tw-utilities);
+@import 'tailwindcss/variants.css' layer(tw-variants);
+
+@layer tw-base {
+}
+
+@layer tw-components {
+  // tailwind component classes here
+}
+
+@layer tw-utilities {
+  // tailwind utitlity classes here
+}
 /* You can add global styles to this file, and also import other style files */
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+}
+
+td,
+th {
+  white-space: nowrap;
+}
+
+.input-container {
+  @apply flex flex-col gap-1.5 w-full justify-end;
+  label {
+    @apply text-xs text-slate-500;
+  }
+
+  .p-dropdown,
+  .p-icon-field,
+  input,
+  .p-inputnumber,
+  .p-calendar {
+    @apply w-full;
+  }
+}
+
+.dialog-actions {
+  @apply flex justify-end gap-2 items-center mt-2;
+}
+
+.p-fluid .p-inputtext {
+  width: unset;
+}

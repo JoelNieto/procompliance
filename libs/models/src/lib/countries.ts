@@ -1,5 +1,7 @@
 export type Country = {
   id: string;
   name: string;
-  code: string;
+  iso2: string;
+  iso3: string;
+  local_name?: string;
 };

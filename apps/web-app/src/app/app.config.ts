@@ -1,3 +1,4 @@
+import { provideHttpClient, withFetch } from '@angular/common/http';
 import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import {
   provideClientHydration,
@@ -13,10 +14,18 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideClientHydration(withEventReplay()),
     provideZoneChangeDetection({ eventCoalescing: true }),
+    provideHttpClient(withFetch()),
     provideAnimationsAsync(),
     providePrimeNG({
       theme: {
         preset: Aura,
+        options: {
+          cssLayerL: {
+            name: 'primeng',
+            order:
+              'tw-base, primeng, tw-components, tw-utilities, tw-variants;',
+          },
+        },
       },
     }),
     provideRouter(appRoutes),
