@@ -1,7 +1,6 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { TabsModule } from 'primeng/tabs';
 import { CountriesComponent } from './countries.component';
-import { GlobalStore } from './stores/app.store';
 
 @Component({
   selector: 'app-settings',
@@ -19,6 +18,4 @@ import { GlobalStore } from './stores/app.store';
   styles: ``,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SettingsComponent {
-  public store = inject(GlobalStore);
-}
+export class SettingsComponent {}

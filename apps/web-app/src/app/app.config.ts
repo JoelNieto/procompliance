@@ -5,13 +5,27 @@ import {
   withEventReplay,
 } from '@angular/platform-browser';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { provideRouter } from '@angular/router';
+import {
+  provideRouter,
+  withComponentInputBinding,
+  withViewTransitions,
+} from '@angular/router';
 import Aura from '@primeng/themes/aura';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { providePrimeNG } from 'primeng/config';
+import { DialogService } from 'primeng/dynamicdialog';
 import { appRoutes } from './app.routes';
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    provideRouter(
+      appRoutes,
+      withComponentInputBinding(),
+      withViewTransitions()
+    ),
+    MessageService,
+    ConfirmationService,
+    DialogService,
     provideClientHydration(withEventReplay()),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideHttpClient(withFetch()),
@@ -28,6 +42,5 @@ export const appConfig: ApplicationConfig = {
         },
       },
     }),
-    provideRouter(appRoutes),
   ],
 };

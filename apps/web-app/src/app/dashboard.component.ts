@@ -1,11 +1,14 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { Button } from 'primeng/button';
+import { CountriesStore } from './stores/countries.store';
 
 @Component({
   selector: 'app-dashboard',
   imports: [Button, RouterLink, RouterLinkActive, RouterOutlet],
-  template: `<nav
+  providers: [CountriesStore],
+  template: `
+    <nav
       class="bg-white border border-b-slate-200 flex fixed z-30 w-full items-center justify-between px-4 py-3"
     >
       <div class="flex items-center">
@@ -65,12 +68,12 @@ import { Button } from 'primeng/button';
       <main class="overflow-auto relative w-full p-4 h-full ms-64">
         <router-outlet />
       </main>
-    </div> `,
+    </div>
+  `,
   styles: `
   a {
     @apply px-6 flex items-center py-3 w-full hover:bg-sky-100 no-underline text-slate-500
   }
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DashboardComponent {}

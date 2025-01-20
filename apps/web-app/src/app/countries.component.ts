@@ -3,6 +3,7 @@ import {
   Component,
   computed,
   inject,
+  OnInit,
 } from '@angular/core';
 import { Country } from '@procompliance/models';
 import { ConfirmationService } from 'primeng/api';
@@ -13,23 +14,24 @@ import { IconField } from 'primeng/iconfield';
 import { InputIcon } from 'primeng/inputicon';
 import { InputText } from 'primeng/inputtext';
 import { TableModule } from 'primeng/table';
-import { TooltipModule } from 'primeng/tooltip';
+import { Tooltip } from 'primeng/tooltip';
 import { CountryFormComponent } from './country-form.component';
-import { GlobalStore } from './stores/app.store';
+import { CountriesStore } from './stores/countries.store';
 
 @Component({
   selector: 'app-countries',
-  providers: [ConfirmationService, DynamicDialogRef, DialogService],
+  providers: [DynamicDialogRef, DialogService],
   imports: [
     TableModule,
     Button,
-    TooltipModule,
+    Tooltip,
     IconField,
     InputIcon,
     InputText,
     ConfirmDialog,
   ],
-  template: `<p-confirmdialog /><p-table
+  template: `
+    <p-confirmdialog /><p-table
       #dt
       [value]="countries()"
       [scrollable]="true"
@@ -98,16 +100,21 @@ import { GlobalStore } from './stores/app.store';
           </td>
         </tr>
       </ng-template>
-    </p-table> `,
+    </p-table>
+  `,
   styles: ``,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CountriesComponent {
-  public store = inject(GlobalStore);
-  public countries = computed(() => [...this.store.countries()]);
+export class CountriesComponent implements OnInit {
+  public store = inject(CountriesStore);
+  public countries = computed(() => [...this.store.entities()]);
   private confirmationService = inject(ConfirmationService);
   private ref = inject(DynamicDialogRef);
   private dialog = inject(DialogService);
+
+  ngOnInit(): void {
+    this.store.fetchItems();
+  }
 
   editCountry(country?: Country) {
     this.ref = this.dialog.open(CountryFormComponent, {
@@ -121,7 +128,6 @@ export class CountriesComponent {
   }
 
   public deleteCountry(id: string) {
-    console.log('deleteCountry', id);
     this.confirmationService.confirm({
       header: 'Confirmación',
       closable: true,
@@ -131,7 +137,7 @@ export class CountriesComponent {
       rejectButtonProps: { label: 'No', severity: 'secondary', outlined: true },
       acceptButtonProps: { label: 'Sí', severity: 'danger' },
       accept: () => {
-        this.store.deleteCountry(id);
+        this.store.deleteItem(id);
       },
     });
   }

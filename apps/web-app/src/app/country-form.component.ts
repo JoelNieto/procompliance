@@ -16,7 +16,7 @@ import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { InputText } from 'primeng/inputtext';
 import { v4 } from 'uuid';
 import { markGroupDirty } from './services/util.service';
-import { GlobalStore } from './stores/app.store';
+import { CountriesStore } from './stores/countries.store';
 
 @Component({
   selector: 'app-country-form',
@@ -78,7 +78,7 @@ export class CountryFormComponent implements OnInit {
 
   public dialogRef = inject(DynamicDialogRef);
   private dialog = inject(DynamicDialogConfig);
-  private store = inject(GlobalStore);
+  private store = inject(CountriesStore);
   private message = inject(MessageService);
 
   public ngOnInit() {
@@ -89,6 +89,10 @@ export class CountryFormComponent implements OnInit {
   }
 
   saveChanges() {
+    if (this.form.pristine) {
+      this.dialogRef.close();
+      return;
+    }
     if (this.form.invalid) {
       markGroupDirty(this.form);
       this.message.add({
@@ -100,9 +104,9 @@ export class CountryFormComponent implements OnInit {
     }
     const { country } = this.dialog.data;
     if (country) {
-      this.store.editCountry(this.form.value);
+      this.store.editItem(this.form.value);
     } else {
-      this.store.createCountry(this.form.value);
+      this.store.createItem(this.form.getRawValue());
     }
 
     this.dialogRef.close();
