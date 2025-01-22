@@ -4,18 +4,13 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { AppModule } from './app/app.module';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, { cors: true });
   const globalPrefix = 'api';
   const config = new DocumentBuilder()
     .setTitle('NestJS API')
     .setDescription('ProCompliance API')
     .build();
 
-  app.enableCors({
-    origin: 'https://procompliance-web.onrender.com/',
-    allowedHeaders: 'Origin, X-Requested-With, Content-Type, Accept',
-    credentials: true,
-  });
   const documentFactory = () => SwaggerModule.createDocument(app, config);
   SwaggerModule.setup(globalPrefix, app, documentFactory);
   app.setGlobalPrefix(globalPrefix);
