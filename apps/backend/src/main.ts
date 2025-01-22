@@ -10,6 +10,12 @@ async function bootstrap() {
     .setTitle('NestJS API')
     .setDescription('ProCompliance API')
     .build();
+
+  app.enableCors({
+    origin: 'https://procompliance-web.onrender.com/',
+    allowedHeaders: 'Origin, X-Requested-With, Content-Type, Accept',
+    credentials: true,
+  });
   const documentFactory = () => SwaggerModule.createDocument(app, config);
   SwaggerModule.setup(globalPrefix, app, documentFactory);
   app.setGlobalPrefix(globalPrefix);
