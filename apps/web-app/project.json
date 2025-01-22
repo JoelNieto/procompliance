@@ -18,6 +18,11 @@
         "inlineStyleLanguage": "scss",
         "assets": [
           {
+            "glob": "_redirects",
+            "input": "apps/web-app/src",
+            "output": "/"
+          },
+          {
             "glob": "**/*",
             "input": "apps/web-app/public"
           }
