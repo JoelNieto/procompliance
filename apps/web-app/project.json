@@ -7,7 +7,7 @@
   "tags": [],
   "targets": {
     "build": {
-      "executor": "@angular-devkit/build-angular:application",
+      "executor": "@nx/angular:application",
       "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/apps/web-app",
@@ -24,11 +24,7 @@
         ],
         "styles": ["apps/web-app/src/styles.scss"],
         "scripts": [],
-        "server": "apps/web-app/src/main.server.ts",
-        "ssr": {
-          "entry": "apps/web-app/src/server.ts"
-        },
-        "outputMode": "server"
+        "plugins": ["plugins/env-var-plugin.js"]
       },
       "configurations": {
         "production": {
@@ -55,7 +51,7 @@
       "defaultConfiguration": "production"
     },
     "serve": {
-      "executor": "@angular-devkit/build-angular:dev-server",
+      "executor": "@nx/angular:dev-server",
       "configurations": {
         "production": {
           "buildTarget": "web-app:build:production"
@@ -70,7 +66,7 @@
       }
     },
     "extract-i18n": {
-      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "executor": "@nx/angular:extract-i18n",
       "options": {
         "buildTarget": "web-app:build"
       }
