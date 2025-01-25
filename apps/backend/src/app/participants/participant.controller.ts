@@ -11,7 +11,7 @@ import { CreateParticipantDto } from './dto/create-participant.dto';
 import { UpdateParticipantDto } from './dto/update-participant.dto';
 import { ParticipantService } from './participant.service';
 
-@Controller('participant')
+@Controller('participants')
 export class ParticipantController {
   constructor(private readonly participantService: ParticipantService) {}
 
@@ -27,7 +27,7 @@ export class ParticipantController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.participantService.findOne(+id);
+    return this.participantService.findOne(id);
   }
 
   @Patch(':id')
@@ -35,11 +35,11 @@ export class ParticipantController {
     @Param('id') id: string,
     @Body() updateParticipantDto: UpdateParticipantDto
   ) {
-    return this.participantService.update(+id, updateParticipantDto);
+    return this.participantService.update({ id, updateParticipantDto });
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.participantService.remove(+id);
+    return this.participantService.remove(id);
   }
 }

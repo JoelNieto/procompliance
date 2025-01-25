@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { Button } from 'primeng/button';
 import { CountriesStore } from './stores/countries.store';
+import { ParticipantsStore } from './stores/participants.store';
 
 @Component({
   selector: 'app-dashboard',
   imports: [Button, RouterLink, RouterLinkActive, RouterOutlet],
-  providers: [CountriesStore],
+  providers: [CountriesStore, ParticipantsStore],
   template: `
     <nav
       class="bg-white border border-b-slate-200 flex fixed z-30 w-full items-center justify-between px-4 py-3"

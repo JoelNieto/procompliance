@@ -8,7 +8,6 @@ import {
 import { Country } from '@procompliance/models';
 import { ConfirmationService } from 'primeng/api';
 import { Button } from 'primeng/button';
-import { ConfirmDialog } from 'primeng/confirmdialog';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { IconField } from 'primeng/iconfield';
 import { InputIcon } from 'primeng/inputicon';
@@ -17,24 +16,16 @@ import { TableModule } from 'primeng/table';
 import { Tooltip } from 'primeng/tooltip';
 import { CountryFormComponent } from './country-form.component';
 import { CountriesStore } from './stores/countries.store';
-
 @Component({
   selector: 'app-countries',
   providers: [DynamicDialogRef, DialogService],
-  imports: [
-    TableModule,
-    Button,
-    Tooltip,
-    IconField,
-    InputIcon,
-    InputText,
-    ConfirmDialog,
-  ],
+  imports: [TableModule, Button, Tooltip, IconField, InputIcon, InputText],
   template: `
-    <p-confirmdialog /><p-table
+    <p-table
       #dt
       [value]="countries()"
       [scrollable]="true"
+      [loading]="store.isLoading()"
       dataKey="id"
       styleClass="p-datatable-striped"
       paginator
@@ -42,6 +33,15 @@ import { CountriesStore } from './stores/countries.store';
       [rowsPerPageOptions]="[5, 10, 20]"
       [globalFilterFields]="['name', 'iso2', 'iso3', 'local_name']"
     >
+      <ng-template #emptymessage>
+        <tr>
+          <td colspan="5">
+            <div class="w-full flex justify-center py-4 items-center">
+              <p>No hay datos</p>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
       <ng-template #caption>
         <div class="flex justify-between items-center">
           <p-iconfield iconPosition="left">
@@ -113,7 +113,7 @@ export class CountriesComponent implements OnInit {
   private dialog = inject(DialogService);
 
   ngOnInit(): void {
-    this.store.fetchItems();
+    this.store.fetchItems({ refresh: true });
   }
 
   editCountry(country?: Country) {

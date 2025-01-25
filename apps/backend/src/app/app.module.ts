@@ -5,6 +5,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { CountriesModule } from './countries/countries.module';
 import { CountryEntity } from './entities/country.entity';
+import { ParticipantEntity } from './entities/participant.entity';
 import { ParticipantModule } from './participants/participant.module';
 @Module({
   imports: [
@@ -20,8 +21,8 @@ import { ParticipantModule } from './participants/participant.module';
         password: config.get('DB_PASSWORD'),
         synchronize: true,
         logging: config.get('DB_LOGGING'),
-        entities: [CountryEntity],
-        ssl: true,
+        entities: [CountryEntity, ParticipantEntity],
+        ssl: config.get('DB_SSL') === 'true',
       }),
       inject: [ConfigService],
     }),

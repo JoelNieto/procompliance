@@ -13,10 +13,8 @@ export const appRoutes: Route[] = [
       },
       {
         path: 'participants',
-        loadComponent: () =>
-          import('./participants.component').then(
-            (x) => x.ParticipantsComponent
-          ),
+        loadChildren: () =>
+          import('./participants.routes').then((x) => x.ParticipantsRoutes),
       },
       {
         path: 'parameters',

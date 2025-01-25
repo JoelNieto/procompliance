@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Country } from '@procompliance/models';
+import { Country, EntityDto } from '@procompliance/models';
 
-export class CreateCountryDto implements Omit<Country, 'id'> {
+export class CreateCountryDto implements EntityDto<Country> {
   @ApiProperty({ required: true })
   name: string;
 

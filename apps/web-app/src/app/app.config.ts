@@ -9,7 +9,6 @@ import {
 import Aura from '@primeng/themes/aura';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { providePrimeNG } from 'primeng/config';
-import { DialogService } from 'primeng/dynamicdialog';
 import { appRoutes } from './app.routes';
 
 export const appConfig: ApplicationConfig = {
@@ -21,7 +20,6 @@ export const appConfig: ApplicationConfig = {
     ),
     MessageService,
     ConfirmationService,
-    DialogService,
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideHttpClient(withFetch()),
     provideAnimationsAsync(),
