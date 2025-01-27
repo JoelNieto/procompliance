@@ -17,6 +17,11 @@ export const appRoutes: Route[] = [
           import('./participants.routes').then((x) => x.ParticipantsRoutes),
       },
       {
+        path: 'param-tables',
+        loadChildren: () =>
+          import('./param-tables.routes').then((x) => x.ParamTablesRoutes),
+      },
+      {
         path: 'parameters',
         loadComponent: () =>
           import('./parameters.component').then((x) => x.ParametersComponent),

@@ -1,12 +1,5 @@
-import { Country, Participant } from '@procompliance/models';
-import {
-  Column,
-  Entity,
-  JoinColumn,
-  ManyToOne,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
-import { CountryEntity } from './country.entity';
+import { Participant } from '@procompliance/models';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity({ name: 'participants' })
 export class ParticipantEntity implements Participant {
@@ -37,17 +30,14 @@ export class ParticipantEntity implements Participant {
   @Column({ type: 'text', default: '' })
   address: string;
 
-  @ManyToOne(() => CountryEntity, { eager: true })
-  @JoinColumn({ name: 'nationality_country_id', referencedColumnName: 'id' })
-  nationality: Country;
+  @Column({ type: 'text', default: '' })
+  nationality: string;
 
-  @ManyToOne(() => CountryEntity, { eager: true })
-  @JoinColumn({ name: 'birth_country_id', referencedColumnName: 'id' })
-  birth_country: Country;
+  @Column({ type: 'text', default: '' })
+  birth_country: string;
 
-  @ManyToOne(() => CountryEntity, { eager: true })
-  @JoinColumn({ name: 'residence_country_id', referencedColumnName: 'id' })
-  residence_country: Country;
+  @Column({ type: 'text', default: '' })
+  residence_country: string;
 
   @Column({ type: 'date', nullable: true })
   birth_date?: Date;

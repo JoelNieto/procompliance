@@ -2,12 +2,13 @@ import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { Button } from 'primeng/button';
 import { CountriesStore } from './stores/countries.store';
+import { ParamTablesStore } from './stores/param-tables.store';
 import { ParticipantsStore } from './stores/participants.store';
 
 @Component({
   selector: 'app-dashboard',
   imports: [Button, RouterLink, RouterLinkActive, RouterOutlet],
-  providers: [CountriesStore, ParticipantsStore],
+  providers: [CountriesStore, ParticipantsStore, ParamTablesStore],
   template: `
     <nav
       class="bg-white border border-b-slate-200 flex fixed z-30 w-full items-center justify-between px-4 py-3"
@@ -35,6 +36,15 @@ import { ParticipantsStore } from './stores/participants.store';
             >
               <i class="pi pi-users mr-2"></i>
               Participantes
+            </a>
+          </li>
+          <li>
+            <a
+              routerLink="param-tables"
+              routerLinkActive="bg-slate-100 text-slate-800"
+            >
+              <i class="pi pi-table mr-2"></i>
+              Tablas de Parametros
             </a>
           </li>
           <li>

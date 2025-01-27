@@ -133,7 +133,7 @@ export function withCustomEntity<T extends { id: EntityId }>(name: string) {
           switchMap((item) =>
             state._http
               .patch<T>(
-                `${process.env['BACKEND_PORT']}${name}/${item.id}`,
+                `${process.env['BACKEND_PORT']}/${name}/${item.id}`,
                 item
               )
               .pipe(

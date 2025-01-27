@@ -4,8 +4,12 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { CountriesModule } from './countries/countries.module';
-import { CountryEntity } from './entities/country.entity';
-import { ParticipantEntity } from './entities/participant.entity';
+import { CountryEntity } from './countries/entities/country.entity';
+import { ParamItemEntity } from './param-items/entities/param-item.entity';
+import { ParamItemsModule } from './param-items/param-items.module';
+import { ParamTableEntity } from './param-tables/entities/param-table.entity';
+import { ParamTablesModule } from './param-tables/param-tables.module';
+import { ParticipantEntity } from './participants/entities/participant.entity';
 import { ParticipantModule } from './participants/participant.module';
 @Module({
   imports: [
@@ -21,13 +25,20 @@ import { ParticipantModule } from './participants/participant.module';
         password: config.get('DB_PASSWORD'),
         synchronize: true,
         logging: config.get('DB_LOGGING'),
-        entities: [CountryEntity, ParticipantEntity],
+        entities: [
+          CountryEntity,
+          ParticipantEntity,
+          ParamTableEntity,
+          ParamItemEntity,
+        ],
         ssl: config.get('DB_SSL') === 'true',
       }),
       inject: [ConfigService],
     }),
     CountriesModule,
     ParticipantModule,
+    ParamTablesModule,
+    ParamItemsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

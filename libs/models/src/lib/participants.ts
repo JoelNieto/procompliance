@@ -1,5 +1,3 @@
-import { Country } from './countries';
-
 export type Participant = {
   id: string;
   first_name: string;
@@ -10,9 +8,9 @@ export type Participant = {
   phone?: string;
   city: string;
   address: string;
-  nationality?: Country;
-  birth_country?: Country;
-  residence_country?: Country;
+  nationality?: string;
+  birth_country?: string;
+  residence_country?: string;
   birth_date?: Date;
   status: 'active' | 'inactive';
   created_at?: Date;

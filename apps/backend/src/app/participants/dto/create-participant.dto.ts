@@ -1,13 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Country, EntityDto, Participant } from '@procompliance/models';
+import { EntityDto, Participant } from '@procompliance/models';
 
-import {
-  IsDate,
-  IsEmail,
-  IsObject,
-  IsPhoneNumber,
-  IsString,
-} from 'class-validator';
+import { IsDate, IsEmail, IsPhoneNumber, IsString } from 'class-validator';
+
 export class CreateParticipantDto implements EntityDto<Participant> {
   @ApiProperty({ required: true })
   @IsString()
@@ -41,17 +36,17 @@ export class CreateParticipantDto implements EntityDto<Participant> {
   @IsString()
   address: string;
 
-  @ApiProperty({ required: true })
-  @IsObject()
-  nationality: Country;
+  @ApiProperty({ required: true, maxLength: 3, example: 'USA' })
+  @IsString()
+  nationality: string;
 
-  @ApiProperty({ required: true })
-  @IsObject()
-  birth_country: Country;
+  @ApiProperty({ required: true, maxLength: 3, example: 'USA' })
+  @IsString()
+  birth_country: string;
 
-  @ApiProperty({ required: true })
-  @IsObject()
-  residence_country: Country;
+  @ApiProperty({ required: true, maxLength: 3, example: 'USA' })
+  @IsString()
+  residence_country: string;
 
   @ApiProperty({ required: false })
   @IsDate()

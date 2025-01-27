@@ -1,10 +1,10 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
   selector: 'app-parameters',
   imports: [CommonModule],
-  template: `<p>parameters works!</p>`,
+  template: `<h2>Paramentros</h2>`,
   styles: ``,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
