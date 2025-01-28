@@ -1,4 +1,3 @@
-import { JsonPipe } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -11,7 +10,7 @@ import { ParamTablesStore } from './stores/param-tables.store';
 
 @Component({
   selector: 'app-param-table-details',
-  imports: [Card, JsonPipe],
+  imports: [Card],
   template: `@let table = store.selectedEntity(); @if(table) {
     <p-card>
       <ng-template #title> {{ table.name }} </ng-template>
